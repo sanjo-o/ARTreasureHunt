@@ -8,10 +8,10 @@ dotenv.config();
 // Import Vercel handlers
 import authRegister from './api/auth/register.js';
 import postersIndex from './api/posters/index.js';
-import posterDetail from './api/posters/[posterId].js';
+import posterDetail from './api/posters/detail.js';
 import collectTreasure from './api/collections/collect.js';
-import userCollections from './api/collections/[userId].js';
-import adminAction from './api/admin/[action].js';
+import userCollections from './api/collections/user.js';
+import adminAction from './api/admin/action.js';
 
 const app = express();
 
@@ -25,21 +25,18 @@ app.post('/api/auth/register', authRegister);
 
 // Posters
 app.get('/api/posters', postersIndex);
-app.get('/api/posters/:posterId', (req, res) => {
-  req.query.posterId = req.params.posterId;
+app.get('/api/posters/detail', (req, res) => {
   return posterDetail(req, res);
 });
 
 // Collections
 app.post('/api/collections/collect', collectTreasure);
-app.get('/api/collections/:userId', (req, res) => {
-  req.query.userId = req.params.userId;
+app.get('/api/collections/user', (req, res) => {
   return userCollections(req, res);
 });
 
 // Admin
-app.all('/api/admin/:action', (req, res) => {
-  req.query.action = req.params.action;
+app.all('/api/admin/action', (req, res) => {
   return adminAction(req, res);
 });
 

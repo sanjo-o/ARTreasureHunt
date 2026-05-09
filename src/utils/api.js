@@ -10,7 +10,7 @@ export async function registerUser(nickname, phone, deviceId) {
 }
 
 export async function getPoster(posterId) {
-  const res = await fetch(`${API_BASE}/posters/${posterId}`);
+  const res = await fetch(`${API_BASE}/posters/detail?posterId=${posterId}`);
   return res.json();
 }
 
@@ -29,14 +29,14 @@ export async function collectTreasure(userId, posterId, deviceInfo) {
 }
 
 export async function getUserCollections(userId) {
-  const res = await fetch(`${API_BASE}/collections/${userId}?t=${Date.now()}`, {
+  const res = await fetch(`${API_BASE}/collections/user?userId=${userId}&t=${Date.now()}`, {
     cache: 'no-store'
   });
   return res.json();
 }
 
 export async function adminRequest(action, adminKey, options = {}) {
-  const res = await fetch(`${API_BASE}/admin/${action}`, {
+  const res = await fetch(`${API_BASE}/admin/action?action=${action}`, {
     method: options.method || 'GET',
     headers: {
       'Content-Type': 'application/json',
