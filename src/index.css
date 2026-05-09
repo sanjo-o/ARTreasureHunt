@@ -1,0 +1,545 @@
+@import "tailwindcss";
+
+/* ══════════════════════════════════════════════════
+   AR TREASURE HUNT — Design System
+   Mongolian Treasure × Modern Neon UI
+   ══════════════════════════════════════════════════ */
+
+@theme {
+  --color-gold-50: #fffbeb;
+  --color-gold-100: #fef3c7;
+  --color-gold-200: #fde68a;
+  --color-gold-300: #fcd34d;
+  --color-gold-400: #fbbf24;
+  --color-gold-500: #f59e0b;
+  --color-gold-600: #d97706;
+  --color-gold-700: #b45309;
+  --color-gold-800: #92400e;
+  --color-gold-900: #78350f;
+
+  --color-night-50: #e8eaf6;
+  --color-night-100: #c5cae9;
+  --color-night-200: #9fa8da;
+  --color-night-300: #7986cb;
+  --color-night-400: #5c6bc0;
+  --color-night-500: #3949ab;
+  --color-night-600: #283593;
+  --color-night-700: #1a1a2e;
+  --color-night-800: #12121f;
+  --color-night-900: #0a0a0f;
+
+  --color-neon-blue: #00d4ff;
+  --color-neon-orange: #ff6b35;
+  --color-neon-green: #00ff88;
+  --color-neon-pink: #ff2e9b;
+}
+
+/* ── Base Styles ── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--color-night-900);
+  color: #e8eaf6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── Star Particles Background ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: 
+    radial-gradient(1px 1px at 10% 20%, rgba(255,215,0,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 30% 60%, rgba(0,212,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 50% 10%, rgba(255,215,0,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 40%, rgba(255,107,53,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 80%, rgba(0,212,255,0.4) 0%, transparent 100%),
+    radial-gradient(2px 2px at 20% 70%, rgba(255,215,0,0.2) 0%, transparent 100%),
+    radial-gradient(2px 2px at 60% 90%, rgba(0,255,136,0.2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 80% 15%, rgba(255,46,155,0.2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 40% 35%, rgba(255,215,0,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 15% 85%, rgba(0,212,255,0.25) 0%, transparent 100%);
+  animation: starDrift 60s linear infinite;
+}
+
+@keyframes starDrift {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-20px); }
+}
+
+/* ── Glassmorphism Cards ── */
+.glass {
+  background: rgba(26, 26, 46, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 215, 0, 0.15);
+  border-radius: 16px;
+}
+
+.glass-strong {
+  background: rgba(26, 26, 46, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  border-radius: 20px;
+}
+
+/* ── Gold Gradient Text ── */
+.gold-text {
+  background: linear-gradient(135deg, #fcd34d 0%, #f59e0b 30%, #fbbf24 60%, #d97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Mongolian Border Pattern ── */
+.mongolian-border {
+  position: relative;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.mongolian-border::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    #fcd34d 0%,
+    #d97706 25%,
+    #fbbf24 50%,
+    #b45309 75%,
+    #fcd34d 100%
+  );
+  z-index: -1;
+  border-radius: 18px;
+}
+
+.mongolian-border::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 15, 0.95);
+  border-radius: inherit;
+  z-index: -1;
+}
+
+/* ── Animated Gold Button ── */
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 32px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #0a0a0f;
+  background: linear-gradient(135deg, #fcd34d 0%, #f59e0b 50%, #d97706 100%);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.3s;
+  text-decoration: none;
+}
+
+.btn-gold::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 60%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s;
+}
+
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(251, 191, 36, 0.4);
+}
+
+.btn-gold:hover::before {
+  transform: translateX(100%);
+}
+
+.btn-gold:active {
+  transform: translateY(0);
+}
+
+/* ── Outline Button ── */
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 28px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-gold-400);
+  background: transparent;
+  border: 2px solid var(--color-gold-400);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+
+.btn-outline:hover {
+  background: rgba(251, 191, 36, 0.1);
+  border-color: var(--color-gold-300);
+  color: var(--color-gold-300);
+}
+
+/* ── Input Fields ── */
+.input-field {
+  width: 100%;
+  padding: 14px 18px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  color: #e8eaf6;
+  background: rgba(26, 26, 46, 0.8);
+  border: 1.5px solid rgba(255, 215, 0, 0.2);
+  border-radius: 12px;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-field::placeholder {
+  color: rgba(232, 234, 246, 0.4);
+}
+
+.input-field:focus {
+  border-color: var(--color-gold-400);
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.15);
+}
+
+/* ── Animations ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes glow {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(255,215,0,0.5)); }
+  50% { filter: drop-shadow(0 0 20px rgba(255,215,0,0.8)); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes pulseGold {
+  0%, 100% { box-shadow: 0 0 5px rgba(255,215,0,0.3); }
+  50% { box-shadow: 0 0 25px rgba(255,215,0,0.6), 0 0 50px rgba(255,215,0,0.2); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes coinSpin {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(360deg); }
+}
+
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-glow { animation: glow 2s ease-in-out infinite; }
+.animate-shimmer {
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
+.animate-pulse-gold { animation: pulseGold 2s ease-in-out infinite; }
+.animate-slide-up { animation: slideUp 0.6s ease-out both; }
+.animate-scale-in { animation: scaleIn 0.5s ease-out both; }
+.animate-coin-spin { animation: coinSpin 2s linear infinite; }
+
+/* ── Prize Card ── */
+.prize-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.prize-card {
+  background: linear-gradient(145deg, rgba(26,26,46,0.95) 0%, rgba(18,18,31,0.98) 100%);
+  border: 2px solid var(--color-gold-400);
+  border-radius: 24px;
+  padding: 40px 32px;
+  max-width: 380px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: scaleIn 0.5s ease-out;
+}
+
+.prize-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,215,0,0.08) 0%, transparent 70%);
+  animation: float 4s ease-in-out infinite;
+}
+
+/* ── Coin floating animation for background ── */
+.coin-particle {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: radial-gradient(circle, #fcd34d, #d97706);
+  border-radius: 50%;
+  animation: coinFloat var(--duration, 3s) ease-in-out infinite var(--delay, 0s);
+  opacity: 0.6;
+}
+
+@keyframes coinFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-40px) rotate(180deg);
+    opacity: 1;
+  }
+}
+
+/* ── AR Camera View ── */
+.ar-container {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: #000;
+}
+
+.ar-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ar-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 51;
+  pointer-events: auto;
+}
+
+.ar-hud {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 52;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ── Scanner Overlay ── */
+.scanner-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 250px;
+  height: 250px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.scanner-overlay::before,
+.scanner-overlay::after,
+.scanner-overlay .scanner-corners::before,
+.scanner-overlay .scanner-corners::after {
+  content: '';
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-color: rgba(0, 212, 255, 0.8);
+  border-style: solid;
+}
+
+.scanner-overlay::before {
+  top: 0;
+  left: 0;
+  border-width: 3px 0 0 3px;
+}
+
+.scanner-overlay::after {
+  top: 0;
+  right: 0;
+  border-width: 3px 3px 0 0;
+}
+
+.scanner-corners {
+  position: absolute;
+  inset: 0;
+}
+
+.scanner-corners::before {
+  bottom: 0;
+  left: 0;
+  border-width: 0 0 3px 3px;
+}
+
+.scanner-corners::after {
+  bottom: 0;
+  right: 0;
+  border-width: 0 3px 3px 0;
+}
+
+.scanner-laser {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(0, 212, 255, 0.8);
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+  animation: scanLaser 2s linear infinite alternate;
+}
+
+@keyframes scanLaser {
+  0% { top: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.scanner-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.3;
+}
+
+/* ── Navbar ── */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 90;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(10, 10, 15, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+/* ── Admin Table ── */
+.admin-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.875rem;
+}
+
+.admin-table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--color-gold-400);
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+  background: rgba(26, 26, 46, 0.5);
+}
+
+.admin-table th:first-child { border-radius: 12px 0 0 0; }
+.admin-table th:last-child { border-radius: 0 12px 0 0; }
+
+.admin-table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.06);
+  color: #c5cae9;
+}
+
+.admin-table tr:hover td {
+  background: rgba(255, 215, 0, 0.04);
+}
+
+/* ── Stat Card ── */
+.stat-card {
+  padding: 24px;
+  border-radius: 16px;
+  background: rgba(26, 26, 46, 0.6);
+  border: 1px solid rgba(255, 215, 0, 0.12);
+  text-align: center;
+  transition: border-color 0.3s, transform 0.2s;
+}
+
+.stat-card:hover {
+  border-color: rgba(255, 215, 0, 0.3);
+  transform: translateY(-4px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .btn-gold {
+    padding: 12px 24px;
+    font-size: 0.9rem;
+  }
+  .prize-card {
+    padding: 28px 20px;
+  }
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-night-900);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold-700);
+  border-radius: 3px;
+}
