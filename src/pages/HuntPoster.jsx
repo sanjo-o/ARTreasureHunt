@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams, useNavigate, Link } from 'react-router-dom'
+import { useParams, useNavigate, useLocation, Link } from 'react-router-dom'
 import ARScene from '../components/ARScene.jsx'
 import PlayerForm from '../components/PlayerForm.jsx'
 import PrizeCard from '../components/PrizeCard.jsx'
@@ -15,6 +15,7 @@ const POSTER_NAMES = {
 export default function HuntPoster() {
   const { posterId } = useParams()
   const navigate = useNavigate()
+  const location = useLocation()
   const pid = parseInt(posterId, 10)
 
   const [player, setPlayer] = useState(getPlayer())
@@ -22,8 +23,14 @@ export default function HuntPoster() {
   const [error, setError] = useState('')
   const [prizeData, setPrizeData] = useState(null)
 
-  // Validate poster ID
+  // Validate poster ID & enforce scanner
   useEffect(() => {
+    // FORCE users to use the active web scanner
+    if (!location.state?.scanned) {
+      navigate('/scan', { replace: true })
+      return
+    }
+
     if (!pid || pid < 1 || pid > 5) {
       setPhase('error')
       setError('Буруу постерийн ID! (1-5 байх ёстой)')

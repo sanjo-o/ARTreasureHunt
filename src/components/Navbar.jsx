@@ -5,8 +5,8 @@ export default function Navbar() {
   const location = useLocation()
   const player = getPlayer()
 
-  // Hide navbar on AR hunt page
-  if (location.pathname.startsWith('/hunt/poster/')) return null
+  // Hide navbar on AR hunt & scan pages
+  if (location.pathname.startsWith('/hunt/poster/') || location.pathname === '/scan') return null
 
   return (
     <nav className="navbar">

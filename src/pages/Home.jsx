@@ -42,10 +42,10 @@ export default function Home() {
 
           {/* CTA Buttons */}
           <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', justifyContent: 'center' }}>
-            <Link to="/hunt/poster/1" className="btn-gold">
-              🎯 Эрдэнэс хайх
+            <Link to="/scan" className="btn-gold" style={{ fontSize: '1.2rem', padding: '16px 32px' }}>
+              📷 QR Скан хийх
             </Link>
-            <Link to="/profile" className="btn-outline">
+            <Link to="/profile" className="btn-outline" style={{ fontSize: '1.2rem', padding: '16px 32px' }}>
               👤 Миний профайл
             </Link>
           </div>
