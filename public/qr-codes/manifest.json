@@ -2,7 +2,7 @@
   {
     "id": 1,
     "title": "Golden Eagle Nest",
-    "url": "https://ar-treasure-hunt.vercel.app/hunt/poster/1",
+    "url": "https://artreasure.vercel.app/hunt/poster/1",
     "qrPng": "/qr-codes/poster-1.png",
     "qrSvg": "/qr-codes/poster-1.svg",
     "prizeAmount": 100000
@@ -10,7 +10,7 @@
   {
     "id": 2,
     "title": "Steppe Wind Temple",
-    "url": "https://ar-treasure-hunt.vercel.app/hunt/poster/2",
+    "url": "https://artreasure.vercel.app/hunt/poster/2",
     "qrPng": "/qr-codes/poster-2.png",
     "qrSvg": "/qr-codes/poster-2.svg",
     "prizeAmount": 100000
@@ -18,7 +18,7 @@
   {
     "id": 3,
     "title": "Khan's Hidden Vault",
-    "url": "https://ar-treasure-hunt.vercel.app/hunt/poster/3",
+    "url": "https://artreasure.vercel.app/hunt/poster/3",
     "qrPng": "/qr-codes/poster-3.png",
     "qrSvg": "/qr-codes/poster-3.svg",
     "prizeAmount": 100000
@@ -26,7 +26,7 @@
   {
     "id": 4,
     "title": "Nomad's Ancient Well",
-    "url": "https://ar-treasure-hunt.vercel.app/hunt/poster/4",
+    "url": "https://artreasure.vercel.app/hunt/poster/4",
     "qrPng": "/qr-codes/poster-4.png",
     "qrSvg": "/qr-codes/poster-4.svg",
     "prizeAmount": 100000
@@ -34,7 +34,7 @@
   {
     "id": 5,
     "title": "Eternal Blue Sky Gate",
-    "url": "https://ar-treasure-hunt.vercel.app/hunt/poster/5",
+    "url": "https://artreasure.vercel.app/hunt/poster/5",
     "qrPng": "/qr-codes/poster-5.png",
     "qrSvg": "/qr-codes/poster-5.svg",
     "prizeAmount": 100000
