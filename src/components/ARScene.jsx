@@ -10,6 +10,7 @@ export default function ARScene({ onCollect }) {
   const [chestOpen, setChestOpen] = useState(false)
   const [collected, setCollected] = useState(false)
   const [isScanning, setIsScanning] = useState(true)
+  const isOpeningRef = useRef(false)
   const videoRef = useRef()
 
   // Try to get camera feed for AR-like background
@@ -44,7 +45,8 @@ export default function ARScene({ onCollect }) {
   }, [])
 
   const handleOpenChest = () => {
-    if (collected) return
+    if (collected || isOpeningRef.current) return
+    isOpeningRef.current = true
     setChestOpen(true)
     playChestOpenSound()
     setTimeout(() => {
