@@ -17,6 +17,7 @@ export default async function handler(req, res) {
 
     const totalPrize = collections.reduce((sum, c) => sum + c.prizeAmount, 0);
 
+    res.setHeader('Cache-Control', 'no-store, max-age=0');
     return res.status(200).json({
       collections,
       totalPrize,

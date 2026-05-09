@@ -29,7 +29,9 @@ export async function collectTreasure(userId, posterId, deviceInfo) {
 }
 
 export async function getUserCollections(userId) {
-  const res = await fetch(`${API_BASE}/collections/${userId}`);
+  const res = await fetch(`${API_BASE}/collections/${userId}?t=${Date.now()}`, {
+    cache: 'no-store'
+  });
   return res.json();
 }
 
