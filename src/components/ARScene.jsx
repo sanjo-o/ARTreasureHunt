@@ -4,6 +4,7 @@ import { OrbitControls, Environment } from '@react-three/drei'
 import TreasureChest from './TreasureChest.jsx'
 import CoinEffect from './CoinEffect.jsx'
 import { playChestOpenSound } from '../utils/sounds.js'
+import jsQR from 'jsqr'
 
 export default function ARScene({ onCollect }) {
   const [cameraStream, setCameraStream] = useState(null)
@@ -12,6 +13,8 @@ export default function ARScene({ onCollect }) {
   const [isScanning, setIsScanning] = useState(true)
   const isOpeningRef = useRef(false)
   const videoRef = useRef()
+  const scanLoopRef = useRef()
+  const canvasRef = useRef(document.createElement('canvas'))
 
   // Try to get camera feed for AR-like background
   useEffect(() => {
@@ -38,11 +41,38 @@ export default function ARScene({ onCollect }) {
     }
   }, [cameraStream])
 
-  // Scanning effect delay
+  // Real-time QR Scanning Loop
   useEffect(() => {
-    const timer = setTimeout(() => setIsScanning(false), 2500)
-    return () => clearTimeout(timer)
-  }, [])
+    if (!isScanning || !cameraStream) return
+    
+    const video = videoRef.current
+    const canvas = canvasRef.current
+    const ctx = canvas.getContext('2d', { willReadFrequently: true })
+    
+    const scanFrame = () => {
+      if (video && video.readyState === video.HAVE_ENOUGH_DATA) {
+        canvas.width = video.videoWidth
+        canvas.height = video.videoHeight
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+        
+        const code = jsQR(imageData.data, imageData.width, imageData.height, {
+          inversionAttempts: "dontInvert",
+        })
+        
+        if (code) {
+          console.log("QR Code detected:", code.data)
+          setIsScanning(false)
+          return // Stop scanning
+        }
+      }
+      scanLoopRef.current = requestAnimationFrame(scanFrame)
+    }
+    
+    scanLoopRef.current = requestAnimationFrame(scanFrame)
+    
+    return () => cancelAnimationFrame(scanLoopRef.current)
+  }, [cameraStream, isScanning])
 
   const handleOpenChest = () => {
     if (collected || isOpeningRef.current) return
@@ -106,10 +136,18 @@ export default function ARScene({ onCollect }) {
 
       {/* HUD overlay */}
       <div className="ar-hud">
-        <div className="glass" style={{ padding: '8px 16px', borderRadius: 12 }}>
+        <div className="glass" style={{ padding: '8px 16px', borderRadius: 12, display: 'flex', alignItems: 'center', gap: 12 }}>
           <span style={{ fontSize: '0.85rem' }}>
-            {isScanning ? '🔍 Орчин хайж байна...' : collected ? '✅ Цуглуулсан!' : chestOpen ? '✨ Нээгдэж байна...' : '👆 Авдар дээр дарна уу'}
+            {isScanning ? '🔍 Постерийн QR кодыг дахин уншуулна уу...' : collected ? '✅ Цуглуулсан!' : chestOpen ? '✨ Нээгдэж байна...' : '👆 Авдар дээр дарна уу'}
           </span>
+          {isScanning && (
+            <button 
+              onClick={() => setIsScanning(false)}
+              style={{ background: 'rgba(255,255,255,0.2)', border: 'none', padding: '4px 8px', borderRadius: 6, color: 'white', fontSize: '0.75rem', cursor: 'pointer' }}
+            >
+              Алгасах
+            </button>
+          )}
         </div>
       </div>
     </div>
